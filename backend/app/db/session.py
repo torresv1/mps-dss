@@ -10,7 +10,7 @@ if not password:
     raise RuntimeError("MPS_DB_PASSWORD environment variable is not set.")
 
 DATABASE_URL = (
-    f"postgresql+psycopg://user:{password}"
+    f"postgresql+psycopg://postgres:{password}"
     "@localhost:5432/mps_dss_dev"
 )
 
