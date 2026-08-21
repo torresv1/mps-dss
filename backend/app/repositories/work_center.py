@@ -9,4 +9,11 @@ class WorkCenterRepository:
         self.session = session
 
     def get_by_id(self, work_center_id: int) -> WorkCenter | None:
-        
+        return self.session.get(WorkCenter, work_center_id)
+
+    def get_by_code(self, code: str) -> WorkCenter | None:
+        return (
+            self.session.query(WorkCenter)
+            .filter(WorkCenter.code == code)
+            .first()
+        )
