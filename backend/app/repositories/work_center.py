@@ -17,3 +17,8 @@ class WorkCenterRepository:
             .filter(WorkCenter.code == code)
             .first()
         )
+
+    def create(self, work_center: WorkCenter) -> WorkCenter:
+        self.session.add(work_center)
+        self.session.flush()
+        return work_center

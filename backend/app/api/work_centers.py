@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_db
-from app.schemas.work_center import WorkCenterResponse
+from app.schemas.work_center import WorkCenterCreate, WorkCenterResponse
 from app.services.work_center import WorkCenterService
 
 
@@ -28,3 +28,17 @@ def get_work_center(
         )
 
     return work_center
+
+
+@router.post(
+    "",
+    response_model=WorkCenterResponse,
+    status_code=201,
+)
+def create_work_center(
+    data: WorkCenterCreate,
+    db: Session = Depends(get_db),
+):
+    service = WorkCenterService(db)
+
+    return service.create(data)
